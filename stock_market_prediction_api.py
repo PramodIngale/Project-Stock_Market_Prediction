@@ -47,7 +47,7 @@ def nsestocklist():
 @st.cache
 def getnsedata(company_name):
     data = get_history(symbol=company_name,
-                       start=date(2016, 1, 1),
+                       start=date(2021, 1, 1),
                        end=date.today())
     data.index = pd.to_datetime(data.index, format="%Y-%m-%d")
     return data
