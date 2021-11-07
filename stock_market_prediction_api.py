@@ -258,6 +258,7 @@ if page == 'NSE':
     
 else:
     stocks = ('Select stock','SBIN', 'INFY', 'DMART')
+    _, dict_list = nsestocklist()
     selected_stock = st.sidebar.selectbox('Listed Stocks', stocks)
     data_df = load_data(selected_stock + ".BO")
 
