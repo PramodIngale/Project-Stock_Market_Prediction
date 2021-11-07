@@ -25,6 +25,8 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 # Text Pre-processing
 import re
 import nltk
+nltk.download("punkt")
+nltk.download("stopwords")
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 import spacy
