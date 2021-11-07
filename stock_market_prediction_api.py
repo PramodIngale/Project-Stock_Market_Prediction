@@ -79,6 +79,7 @@ def pctchange(df, n):
     data.index = (data.index).date
     profit_data = data.dropna()
     profit_data.rename(columns={"Close" : "Closing Price"}, inplace=True)
+    profit_data.round(2)
     return profit_data
 
 def color_negative_red(val):
@@ -257,8 +258,8 @@ if page == 'NSE':
      
     
 else:
-    stocks = ('Select stock','SBIN', 'INFY', 'DMART')
     _, dict_list = nsestocklist()
+    stocks = ('Select stock','SBIN', 'INFY', 'DMART')
     selected_stock = st.sidebar.selectbox('Listed Stocks', stocks)
     data_df = load_data(selected_stock + ".BO")
 
@@ -273,7 +274,7 @@ else:
     st.subheader("Price Summary")
     col1, col2, col3 = st.columns([1,1,1])
     col1.write(f"Closing Price ({((data_df.index[-1]).date())})")
-    col1.write(round(latest_close_price,3))
+    col1.write(round(latest_close_price,2))
     col2.write("52 Week High")
     col2.write(round(highprice(data_df),3))
     col3.write("52 Week Low")
@@ -283,14 +284,20 @@ else:
     st.subheader("Company Overview")
     stock_info = stockinformation(selected_stock + ".NS")
     col1, col2, col3, col4 = st.columns([1,1,1,1])
-    col1.write('Market Cap')
+    col1.write('Market Cap, Cr')
     col1.write(stock_info['marketCap'])
     col2.write('P/E Ratio')
-    col2.write(round(stock_info['trailingPE'],2))
+    col2.write(stock_info['trailingPE'])
     col3.write('ROE')
-    col3.write('{:.2f}%'.format(stock_info['returnOnEquity']*100))
+    if stock_info['returnOnEquity'] != None:
+        col3.write('{:.2f}%'.format(stock_info['returnOnEquity']*100))
+    else:
+        col3.write("N/A")
     col4.write('Dividend Yield')
-    col4.write('{:.2f}%'.format(stock_info['dividendYield']*100))
+    if stock_info['dividendYield'] != None:
+        col4.write('{:.2f}%'.format(stock_info['dividendYield']*100))
+    else:
+        col4.write("N/A")
     st.write("___________________________________________________________")
     
     st.line_chart(data_df["Close"])
