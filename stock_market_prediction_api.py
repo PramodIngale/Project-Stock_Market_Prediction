@@ -30,7 +30,7 @@ from nltk.stem import WordNetLemmatizer
 import spacy
 from collections import Counter
 stop_words=stopwords.words('english')
-nlp=spacy.load('en_core_web_sm')
+# nlp=spacy.load('en_core_web_sm')
 
 #-----------------------------------------------------------------------------------------
 #Getting list of stocks from nse
@@ -332,6 +332,6 @@ else:
     # Stock Sentiment analysis
     st.subheader('Stock Sentiment Analysis')
     df_tweet = get_tweets(dict_list[selected_stock])
-    tweet_text = df_tweet['Text']
-    senti_fig = tweet_sentiment(tweet_text)
-    st.pyplot(senti_fig.figure)
+#     tweet_text = df_tweet['Text']
+#     senti_fig = tweet_sentiment(tweet_text)
+#     st.pyplot(senti_fig.figure)
