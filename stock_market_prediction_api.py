@@ -32,7 +32,8 @@ from nltk.stem import WordNetLemmatizer
 import spacy
 from collections import Counter
 stop_words=stopwords.words('english')
-nlp=spacy.load('en_core_web_sm')
+import en_core_web_sm
+nlp=en_core_web_sm.load()
 
 #-----------------------------------------------------------------------------------------
 #Getting list of stocks from nse
