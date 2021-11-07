@@ -274,7 +274,7 @@ else:
     st.header(f"{dict_list[selected_stock]}")
     st.write("___________________________________________________________")
 #     data_df = getnsedata(selected_stock)
-      data_df = load_data(selected_stock)
+    data_df = load_data(selected_stock)
 #     latest_close_price = data_df.iloc[-1,7]
 #     st.subheader("Price Summary")
 #     col1, col2, col3 = st.columns([1,1,1])
