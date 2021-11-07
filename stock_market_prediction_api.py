@@ -44,12 +44,17 @@ def nsestocklist():
     return stock_list, all_stock_codes
 
 #Downlaod NSE data for specific company
-@st.cache
-def getnsedata(company_name):
-    data = get_history(symbol=company_name,
-                       start=date(2021, 1, 1),
-                       end=date.today())
-    data.index = pd.to_datetime(data.index, format="%Y-%m-%d")
+# @st.cache
+# def getnsedata(company_name):
+#     data = get_history(symbol=company_name,
+#                        start=date(2021, 1, 1),
+#                        end=date.today())
+#     data.index = pd.to_datetime(data.index, format="%Y-%m-%d")
+#     return data
+
+def load_data(ticker):
+    data = yf.download(ticker, "2020-1-1", date.today())
+    data.reset_index(inplace=True)
     return data
 
 #-----------------------------------------------------------------------------------------
@@ -268,59 +273,60 @@ if selected_stock == "Select stock":
 else:
     st.header(f"{dict_list[selected_stock]}")
     st.write("___________________________________________________________")
-    data_df = getnsedata(selected_stock)
-    latest_close_price = data_df.iloc[-1,7]
-    st.subheader("Price Summary")
-    col1, col2, col3 = st.columns([1,1,1])
-    col1.write(f"Closing Price ({((data_df.index[-1]).date())})")
-    col1.write(latest_close_price)
-    col2.write("52 Week High")
-    col2.write(highprice(data_df))
-    col3.write("52 Week Low")
-    col3.write(lowprice(data_df))
-    st.write("___________________________________________________________")
+#     data_df = getnsedata(selected_stock)
+      data_df = load_data(selected_stock)
+#     latest_close_price = data_df.iloc[-1,7]
+#     st.subheader("Price Summary")
+#     col1, col2, col3 = st.columns([1,1,1])
+#     col1.write(f"Closing Price ({((data_df.index[-1]).date())})")
+#     col1.write(latest_close_price)
+#     col2.write("52 Week High")
+#     col2.write(highprice(data_df))
+#     col3.write("52 Week Low")
+#     col3.write(lowprice(data_df))
+#     st.write("___________________________________________________________")
     
-    st.subheader("Company Overview")
-    stock_info = stockinformation(selected_stock)
-    col1, col2, col3, col4 = st.columns([1,1,1,1])
-    col1.write('Market Cap, Cr')
-    col1.write(stock_info['marketCap'])
-    col2.write('P/E Ratio')
-    col2.write(stock_info['trailingPE'])
-    col3.write('ROE')
-    col3.write('{:.2f}%'.format(stock_info['returnOnEquity']*100))
-    col4.write('Dividend Yield')
-    col4.write('{:.2f}%'.format(stock_info['dividendYield']*100))
-    st.write("___________________________________________________________")
+#     st.subheader("Company Overview")
+#     stock_info = stockinformation(selected_stock)
+#     col1, col2, col3, col4 = st.columns([1,1,1,1])
+#     col1.write('Market Cap, Cr')
+#     col1.write(stock_info['marketCap'])
+#     col2.write('P/E Ratio')
+#     col2.write(stock_info['trailingPE'])
+#     col3.write('ROE')
+#     col3.write('{:.2f}%'.format(stock_info['returnOnEquity']*100))
+#     col4.write('Dividend Yield')
+#     col4.write('{:.2f}%'.format(stock_info['dividendYield']*100))
+#     st.write("___________________________________________________________")
     
-    st.line_chart(data_df["Close"])
-    st.write("___________________________________________________________")
+#     st.line_chart(data_df["Close"])
+#     st.write("___________________________________________________________")
     
-    st.subheader("Profit and Loss Summary of Last 5 Days")
-    profit_data = (pctchange(data_df, 6)).style.applymap(color_negative_red)
-    col1, col2, col3 = st.columns([2,3,2])
-    col2.write(profit_data)
+#     st.subheader("Profit and Loss Summary of Last 5 Days")
+#     profit_data = (pctchange(data_df, 6)).style.applymap(color_negative_red)
+#     col1, col2, col3 = st.columns([2,3,2])
+#     col2.write(profit_data)
     
-#     normalisation of data
-    scaler=MinMaxScaler(feature_range=(0,1))
-    data_scaled = scaler.fit_transform(pd.DataFrame(data_df.iloc[:,7]))
+# #     normalisation of data
+#     scaler=MinMaxScaler(feature_range=(0,1))
+#     data_scaled = scaler.fit_transform(pd.DataFrame(data_df.iloc[:,7]))
     
-    x_train, y_train = datapreparation(data_scaled)
+#     x_train, y_train = datapreparation(data_scaled)
     
-    if selected_stock not in ['SBIN', 'INFY', 'DMART']:
-        selected_stock = "Others"
+#     if selected_stock not in ['SBIN', 'INFY', 'DMART']:
+#         selected_stock = "Others"
 
-    neuron1, dropout_rate,epochs, batch_size = best_parameters[selected_stock].values()
+#     neuron1, dropout_rate,epochs, batch_size = best_parameters[selected_stock].values()
     
-    predicted_value = model_building_prediction(neuron1, dropout_rate, x_train, y_train, epochs, batch_size, data_scaled, scaler, 10)
-    st.write("___________________________________________________________")
+#     predicted_value = model_building_prediction(neuron1, dropout_rate, x_train, y_train, epochs, batch_size, data_scaled, scaler, 10)
+#     st.write("___________________________________________________________")
     
-    st.subheader("Predictions")
-    forecast_df = forecastedfigure(data_df, predicted_value)
-    c1, c2=st.columns([1,2])
-    c1.dataframe(predicted_value)
-    c2.line_chart(forecast_df)
-    st.write("___________________________________________________________")
+#     st.subheader("Predictions")
+#     forecast_df = forecastedfigure(data_df, predicted_value)
+#     c1, c2=st.columns([1,2])
+#     c1.dataframe(predicted_value)
+#     c2.line_chart(forecast_df)
+#     st.write("___________________________________________________________")
     
 #     # Stock Sentiment analysis
 #     st.subheader('Stock Sentiment Analysis')
