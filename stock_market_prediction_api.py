@@ -280,7 +280,7 @@ else:
     st.write("___________________________________________________________")
     
     st.subheader("Company Overview")
-    stock_info = stockinformation(selected_stock)
+    stock_info = stockinformation(selected_stock + ".NS")
     col1, col2, col3, col4 = st.columns([1,1,1,1])
     col1.write('Market Cap')
     col1.write(stock_info['marketCap'])
