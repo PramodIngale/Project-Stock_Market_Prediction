@@ -282,7 +282,7 @@ else:
     st.subheader("Company Overview")
     stock_info = stockinformation(selected_stock)
     col1, col2, col3, col4 = st.columns([1,1,1,1])
-    col1.write('Market Cap, Cr')
+    col1.write('Market Cap')
     col1.write(stock_info['marketCap'])
     col2.write('P/E Ratio')
     col2.write(round(stock_info['trailingPE'],2))
