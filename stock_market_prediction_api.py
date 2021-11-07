@@ -53,7 +53,7 @@ def nsestocklist():
 #     return data
 
 def load_data(ticker):
-    data = yf.download(ticker, "2020-1-1", date.today())
+    data = yf.download(ticker, "2016-1-1", date.today())
     data.reset_index(inplace=True)
     return data
 
