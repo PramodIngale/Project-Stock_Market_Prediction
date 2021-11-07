@@ -274,9 +274,9 @@ else:
     col1.write(f"Closing Price ({((data_df.index[-1]).date())})")
     col1.write(round(latest_close_price,3))
     col2.write("52 Week High")
-    col2.write(highprice(data_df))
+    col2.write(round(highprice(data_df),3))
     col3.write("52 Week Low")
-    col3.write(lowprice(data_df))
+    col3.write(round(lowprice(data_df),3))
     st.write("___________________________________________________________")
     
     st.subheader("Company Overview")
