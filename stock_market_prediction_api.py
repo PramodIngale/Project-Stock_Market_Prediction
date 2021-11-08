@@ -192,7 +192,6 @@ def get_tweets(company_name):
 
 #-----------------------------------------------------------------------------------------
 #Sentiment Analysis of collected tweets
-@st.cache
 def tweet_sentiment(tweet):
     output=[]
     for i in range(len(tweet)):
