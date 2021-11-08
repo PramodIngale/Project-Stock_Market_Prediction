@@ -27,4 +27,3 @@ tensorflow-estimator==2.6.0
 vaderSentiment==3.3.2
 yfinance==0.1.64
 en==0.0.1
-en_core_web_sm
