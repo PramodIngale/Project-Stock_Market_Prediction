@@ -32,7 +32,7 @@ from nltk.stem import WordNetLemmatizer
 import spacy
 from collections import Counter
 stop_words=stopwords.words('english')
-# nlp = spacy.load('en_core_web_sm')
+nlp = spacy.load('en_core_web_sm')
 
 #-----------------------------------------------------------------------------------------
 #Getting list of stocks from nse
@@ -175,59 +175,59 @@ def forecastedfigure(train_df, predicted_df):
     return forecast_df
 
 #-----------------------------------------------------------------------------------------
-# #Function to extract stock tweets
-# @st.cache
-# def get_tweets(company_name):
-#     currect_date = date.today()
-#     # Creating list to append tweet data to
-#     tweets = []
-#     # Using TwitterSearchScraper to scrape data and append tweets to list
-#     # Using enumerate to get the tweet and the index (to break at certain no of tweets)
-#     for i,tweet in enumerate(twitterScraper.TwitterSearchScraper('{} until:{}'.format(company_name, currect_date- timedelta(days=3))).get_items()):
-#         if i>700:
-#             break
-#         tweets.append([tweet.date, tweet.content])
-#     tweet_df =pd.DataFrame(tweets, columns=['Datetime', 'Text'])
-#     return tweet_df
+#Function to extract stock tweets
+@st.cache
+def get_tweets(company_name):
+    currect_date = date.today()
+    # Creating list to append tweet data to
+    tweets = []
+    # Using TwitterSearchScraper to scrape data and append tweets to list
+    # Using enumerate to get the tweet and the index (to break at certain no of tweets)
+    for i,tweet in enumerate(twitterScraper.TwitterSearchScraper('{} until:{}'.format(company_name, currect_date- timedelta(days=3))).get_items()):
+        if i>700:
+            break
+        tweets.append([tweet.date, tweet.content])
+    tweet_df =pd.DataFrame(tweets, columns=['Datetime', 'Text'])
+    return tweet_df
 
 #-----------------------------------------------------------------------------------------
-# #Sentiment Analysis of collected tweets
-# def tweet_sentiment(tweet):
-#     output=[]
-#     for i in range(len(tweet)):
-#         #convert to string
-#         review =str(tweet)
+#Sentiment Analysis of collected tweets
+def tweet_sentiment(tweet):
+    output=[]
+    for i in range(len(tweet)):
+        #convert to string
+        review =str(tweet)
     
-#         #to handle punctuations
-#         review = re.sub('[^a-zA-Z]', ' ', tweet[i])
+        #to handle punctuations
+        review = re.sub('[^a-zA-Z]', ' ', tweet[i])
     
-#          # Converting Text to Lower case
-#         review = review.lower()
+         # Converting Text to Lower case
+        review = review.lower()
 
-#         # Spliting each words - eg ['I','was','happy']
-#         review = review.split()
+        # Spliting each words - eg ['I','was','happy']
+        review = review.split()
 
-#         # Applying Lemmitization for the words eg: Argument -> Argue - Using Spacy Library
-#         review = nlp(' '.join(review))
-#         review = [token.lemma_ for token in review]
+        # Applying Lemmitization for the words eg: Argument -> Argue - Using Spacy Library
+        review = nlp(' '.join(review))
+        review = [token.lemma_ for token in review]
 
-#         # Removal of stop words
-#         review = [word for word in review if word not in stop_words]
+        # Removal of stop words
+        review = [word for word in review if word not in stop_words]
 
-#         # Joining the words in sentences
-#         review = ' '.join(review)
-#         output.append(review)
+        # Joining the words in sentences
+        review = ' '.join(review)
+        output.append(review)
     
-#     x = pd.DataFrame(output)
-#     # Create a SentimentIntensityAnalyzer object.
-#     vader = SentimentIntensityAnalyzer()
-#     x['score'] = [vader.polarity_scores(item) for item in output]
-#     x['compound'] = [item['compound'] for item in x['score']]
-#     # decide sentiment as positive, negative and neutral
-#     x['sentiment'] = [ 'Positive' if i >= 0.05 else 'Negative' if i <= - 0.05 else 'Neutral' for i in x['compound']]
-#     fig = x['sentiment'].value_counts().plot.pie(autopct=("%.2f%%"),figsize=(1,1))
-#     #fig = x['sentiment'].value_counts().plot.pie(autopct="%.2f%%",figsize=(2,2), wedgeprops={'linewidth': 1.0, 'edgecolor': 'white'}, )
-#     return fig
+    x = pd.DataFrame(output)
+    # Create a SentimentIntensityAnalyzer object.
+    vader = SentimentIntensityAnalyzer()
+    x['score'] = [vader.polarity_scores(item) for item in output]
+    x['compound'] = [item['compound'] for item in x['score']]
+    # decide sentiment as positive, negative and neutral
+    x['sentiment'] = [ 'Positive' if i >= 0.05 else 'Negative' if i <= - 0.05 else 'Neutral' for i in x['compound']]
+    fig = x['sentiment'].value_counts().plot.pie(autopct=("%.2f%%"),figsize=(1,1))
+    #fig = x['sentiment'].value_counts().plot.pie(autopct="%.2f%%",figsize=(2,2), wedgeprops={'linewidth': 1.0, 'edgecolor': 'white'}, )
+    return fig
     
 #-----------------------------------------------------------------------------------------
 #Above code deficts the user defined functions
@@ -331,9 +331,9 @@ else:
     c2.line_chart(forecast_df)
     st.write("___________________________________________________________")
     
-#     # Stock Sentiment analysis
-#     st.subheader('Stock Sentiment Analysis')
-#     df_tweet = get_tweets(dict_list[selected_stock])
-#     tweet_text = df_tweet['Text']
-#     senti_fig = tweet_sentiment(tweet_text)
-#     st.pyplot(senti_fig.figure)
+    # Stock Sentiment analysis
+    st.subheader('Stock Sentiment Analysis')
+    df_tweet = get_tweets(dict_list[selected_stock])
+    tweet_text = df_tweet['Text']
+    senti_fig = tweet_sentiment(tweet_text)
+    st.pyplot(senti_fig.figure)
