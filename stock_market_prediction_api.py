@@ -249,7 +249,7 @@ page=st.sidebar.radio("Security Exchanges", page_name)
 best_parameters = {"SBIN":{"neuron1":40,"dropout_rate":0.1,"epochs":125,"batch_size":30},
                   "INFY":{"neuron1":40,"dropout_rate":0.1,"epochs":80,"batch_size":40},
                   "DMART":{"neuron1":60,"dropout_rate":0.0,"epochs":150,"batch_size":60},
-                  "Others":{"neuron1":60,"dropout_rate":0.2,"epochs":250,"batch_size":40}}
+                  "Others":{"neuron1":60,"dropout_rate":0.2,"epochs":150,"batch_size":100}}
 
 if page == 'NSE': 
     stocks, dict_list = nsestocklist()
