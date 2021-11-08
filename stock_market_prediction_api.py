@@ -18,9 +18,9 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout
 from tensorflow.keras.layers import LSTM
 
-# #Libraries for tweet extraction and model building
-# import snscrape.modules.twitter as twitterScraper
-# from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+#Libraries for tweet extraction and model building
+import snscrape.modules.twitter as twitterScraper
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 # # Text Pre-processing
 # import re
@@ -30,7 +30,6 @@ from tensorflow.keras.layers import LSTM
 # from nltk.corpus import stopwords
 # from nltk.stem import WordNetLemmatizer
 # import spacy
-# from collections import Counter
 # stop_words=stopwords.words('english')
 # nlp = spacy.load('en_core_web_sm')
 
