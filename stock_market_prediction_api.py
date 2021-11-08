@@ -315,9 +315,10 @@ else:
     x_train, y_train = datapreparation(data_scaled)
    
     if selected_stock not in ['SBIN', 'INFY', 'DMART']:
-        selected_stock = "Others"
-
-    neuron1, dropout_rate,epochs, batch_size = best_parameters[selected_stock].values()
+        selected_stock_rename = "Others"
+        neuron1, dropout_rate,epochs, batch_size = best_parameters[selected_stock_rename].values()
+    else:
+        neuron1, dropout_rate,epochs, batch_size = best_parameters[selected_stock].values()
         
     predicted_value = model_building_prediction(neuron1, dropout_rate, x_train, y_train, epochs, batch_size, data_scaled, scaler, 10)
     st.write("___________________________________________________________")
@@ -329,13 +330,13 @@ else:
     c2.line_chart(forecast_df)
     st.write("___________________________________________________________")
     
-# #     Stock Sentiment analysis
-#     st.subheader('Stock Sentiment Analysis')
-#     df_tweet = get_tweets(dict_list[selected_stock])
-#     tweet_text = df_tweet['Text']
-#     x = tweet_sentiment(tweet_text)
-#     fig, ax = plt.subplots()
-#     ax.pie(x['sentiment'].value_counts(), labels=x['sentiment'].value_counts().index, autopct='%.2f%%')
-#     c1, c2, c3 = st.columns([1,2,1])
-#     c2.pyplot(fig)
+#     Stock Sentiment analysis
+    st.subheader('Stock Sentiment Analysis')
+    df_tweet = get_tweets(dict_list[selected_stock])
+    tweet_text = df_tweet['Text']
+    x = tweet_sentiment(tweet_text)
+    fig, ax = plt.subplots()
+    ax.pie(x['sentiment'].value_counts(), labels=x['sentiment'].value_counts().index, autopct='%.2f%%')
+    c1, c2, c3 = st.columns([1,2,1])
+    c2.pyplot(fig)
     
