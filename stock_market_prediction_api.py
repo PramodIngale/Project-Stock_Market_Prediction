@@ -337,6 +337,7 @@ else:
     tweet_text = df_tweet['Text']
     x = tweet_sentiment(tweet_text)
     fig, ax = plt.subplots()
-    ax.pie(x['sentiment'].value_counts(), labels=x['sentiment'].value_counts().index, autopct='%.2f%%')
+#     ax.pie(x['sentiment'].value_counts(), labels=x['sentiment'].value_counts().index, autopct='%.2f%%')
+    ax.bar(x['sentiment'].value_counts().index, x['sentiment'].value_counts())
     c1, c2, c3 = st.columns(3)
     c2.pyplot(fig)
