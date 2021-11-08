@@ -191,43 +191,43 @@ def get_tweets(company_name):
     return tweet_df
 
 #-----------------------------------------------------------------------------------------
-# #Sentiment Analysis of collected tweets
-# def tweet_sentiment(tweet):
-#     output=[]
-#     for i in range(len(tweet)):
-#         #convert to string
-#         review =str(tweet)
+#Sentiment Analysis of collected tweets
+def tweet_sentiment(tweet):
+    output=[]
+    for i in range(len(tweet)):
+        #convert to string
+        review =str(tweet)
     
-#         #to handle punctuations
-#         review = re.sub('[^a-zA-Z]', ' ', tweet[i])
+        #to handle punctuations
+        review = re.sub('[^a-zA-Z]', ' ', tweet[i])
     
-#          # Converting Text to Lower case
-#         review = review.lower()
+         # Converting Text to Lower case
+        review = review.lower()
 
-#         # Spliting each words - eg ['I','was','happy']
-#         review = review.split()
+        # Spliting each words - eg ['I','was','happy']
+        review = review.split()
 
-#         # Applying Lemmitization for the words eg: Argument -> Argue - Using Spacy Library
-#         review = nlp(' '.join(review))
-#         review = [token.lemma_ for token in review]
+        # Applying Lemmitization for the words eg: Argument -> Argue - Using Spacy Library
+        review = nlp(' '.join(review))
+        review = [token.lemma_ for token in review]
 
-#         # Removal of stop words
-#         review = [word for word in review if word not in stop_words]
+        # Removal of stop words
+        review = [word for word in review if word not in stop_words]
 
-#         # Joining the words in sentences
-#         review = ' '.join(review)
-#         output.append(review)
+        # Joining the words in sentences
+        review = ' '.join(review)
+        output.append(review)
     
-#     x = pd.DataFrame(output)
-#     # Create a SentimentIntensityAnalyzer object.
-#     vader = SentimentIntensityAnalyzer()
-#     x['score'] = [vader.polarity_scores(item) for item in output]
-#     x['compound'] = [item['compound'] for item in x['score']]
-#     # decide sentiment as positive, negative and neutral
-#     x['sentiment'] = [ 'Positive' if i >= 0.05 else 'Negative' if i <= - 0.05 else 'Neutral' for i in x['compound']]
-#     fig = x['sentiment'].value_counts().plot.pie(autopct=("%.2f%%"),figsize=(1,1))
-#     #fig = x['sentiment'].value_counts().plot.pie(autopct="%.2f%%",figsize=(2,2), wedgeprops={'linewidth': 1.0, 'edgecolor': 'white'}, )
-#     return fig
+    x = pd.DataFrame(output)
+    # Create a SentimentIntensityAnalyzer object.
+    vader = SentimentIntensityAnalyzer()
+    x['score'] = [vader.polarity_scores(item) for item in output]
+    x['compound'] = [item['compound'] for item in x['score']]
+    # decide sentiment as positive, negative and neutral
+    x['sentiment'] = [ 'Positive' if i >= 0.05 else 'Negative' if i <= - 0.05 else 'Neutral' for i in x['compound']]
+    fig = x['sentiment'].value_counts().plot.pie(autopct=("%.2f%%"),figsize=(1,1))
+    #fig = x['sentiment'].value_counts().plot.pie(autopct="%.2f%%",figsize=(2,2), wedgeprops={'linewidth': 1.0, 'edgecolor': 'white'}, )
+    return fig
     
 #-----------------------------------------------------------------------------------------
 #Above code deficts the user defined functions
@@ -334,6 +334,6 @@ else:
 #     Stock Sentiment analysis
     st.subheader('Stock Sentiment Analysis')
     df_tweet = get_tweets(dict_list[selected_stock])
-#     tweet_text = df_tweet['Text']
-#     senti_fig = tweet_sentiment(tweet_text)
-#     st.pyplot(senti_fig.figure)
+    tweet_text = df_tweet['Text']
+    senti_fig = tweet_sentiment(tweet_text)
+    st.pyplot(senti_fig.figure)
