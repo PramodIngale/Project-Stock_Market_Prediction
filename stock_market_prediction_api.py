@@ -314,12 +314,12 @@ else:
     
     x_train, y_train = datapreparation(data_scaled)
     
+    neuron1, dropout_rate,epochs, batch_size = best_parameters[selected_stock].values()
+    
     if selected_stock not in ['SBIN', 'INFY', 'DMART']:
         selected_stock_rename = "Others"
         neuron1, dropout_rate,epochs, batch_size = best_parameters[selected_stock_rename].values()
-    else:
-        neuron1, dropout_rate,epochs, batch_size = best_parameters[selected_stock].values()
-    
+        
     predicted_value = model_building_prediction(neuron1, dropout_rate, x_train, y_train, epochs, batch_size, data_scaled, scaler, 10)
     st.write("___________________________________________________________")
     
