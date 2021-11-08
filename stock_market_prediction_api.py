@@ -227,7 +227,7 @@ def tweet_sentiment(tweet):
     x['sentiment'] = [ 'Positive' if i >= 0.05 else 'Negative' if i <= - 0.05 else 'Neutral' for i in x['compound']]
 #     fig = x['sentiment'].value_counts().plot.pie(autopct=("%.2f%%"),figsize=(1,1))
     #fig = x['sentiment'].value_counts().plot.pie(autopct="%.2f%%",figsize=(2,2), wedgeprops={'linewidth': 1.0, 'edgecolor': 'white'}, )
-    return x['sentiment']
+    return x
     
 #-----------------------------------------------------------------------------------------
 #Above code deficts the user defined functions
