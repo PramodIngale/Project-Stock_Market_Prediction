@@ -336,5 +336,5 @@ else:
     df_tweet = get_tweets(dict_list[selected_stock])
     tweet_text = df_tweet['Text']
     x = tweet_sentiment(tweet_text)
-    fig = x['sentiment'].value_counts().plot.pie(autopct=("%.2f%%"),figsize=(1,1))
-    st.write(x)
+    fst.write(x['sentiment'].value_counts().plot.pie(autopct=("%.2f%%")))
+#     st.write(x)
