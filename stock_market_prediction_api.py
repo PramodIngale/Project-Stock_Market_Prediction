@@ -22,16 +22,16 @@ from tensorflow.keras.layers import LSTM
 import snscrape.modules.twitter as twitterScraper
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
-# # Text Pre-processing
-# import re
-# import nltk
-# nltk.download("punkt")
-# nltk.download("stopwords")
-# from nltk.corpus import stopwords
-# from nltk.stem import WordNetLemmatizer
-# import spacy
-# stop_words=stopwords.words('english')
-# nlp = spacy.load('en_core_web_sm')
+# Text Pre-processing
+import re
+import nltk
+nltk.download("punkt")
+nltk.download("stopwords")
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+import spacy
+stop_words=stopwords.words('english')
+nlp = spacy.load('en_core_web_sm')
 
 #-----------------------------------------------------------------------------------------
 #Getting list of stocks from nse
