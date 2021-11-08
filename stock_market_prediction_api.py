@@ -133,7 +133,7 @@ def model_building_prediction(neuron1, dropout_rate, x_train, y_train, epochs, b
     
     model_lstm.fit(x_train,y_train,epochs=epochs, batch_size=batch_size, verbose=0)
     
-#-----------------------------Preicton Part-----------------------------------------------------
+#-----------------------------Prediction Part-----------------------------------------------------
     x_data = data_scaled.copy()
     predicted_price_list = []
     time_steps = 30
