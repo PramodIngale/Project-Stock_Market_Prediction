@@ -338,4 +338,4 @@ else:
     x = tweet_sentiment(tweet_text)
     fig = plt.pie(x['sentiment'].value_counts())
 #     st.pyplot(fig)
-    st.write(x)
+    st.write(x['sentiment'].value_counts())
