@@ -330,8 +330,8 @@ else:
     c2.line_chart(forecast_df)
     st.write("___________________________________________________________")
     
-#     # Stock Sentiment analysis
-#     st.subheader('Stock Sentiment Analysis')
+#     Stock Sentiment analysis
+    st.subheader('Stock Sentiment Analysis')
 #     df_tweet = get_tweets(dict_list[selected_stock])
 #     tweet_text = df_tweet['Text']
 #     senti_fig = tweet_sentiment(tweet_text)
