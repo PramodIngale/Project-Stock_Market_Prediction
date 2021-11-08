@@ -337,4 +337,4 @@ else:
     tweet_text = df_tweet['Text']
     x = tweet_sentiment(tweet_text)
     fig = x['sentiment'].value_counts().plot.pie(autopct=("%.2f%%"),figsize=(1,1))
-    st.pyplot(fig.figure)
+    st.write(fig.figure)
