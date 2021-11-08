@@ -12,6 +12,7 @@ import yfinance as yf
 #libraires for visualisation
 import plotly.graph_objects as go
 import matplotlib.pyplot as plt
+plt.rcParams.update({'font.size': 3})
 
 #Libraries for model building
 from tensorflow.keras.models import Sequential
