@@ -225,9 +225,9 @@ def tweet_sentiment(tweet):
     x['compound'] = [item['compound'] for item in x['score']]
     # decide sentiment as positive, negative and neutral
     x['sentiment'] = [ 'Positive' if i >= 0.05 else 'Negative' if i <= - 0.05 else 'Neutral' for i in x['compound']]
-    fig = x['sentiment'].value_counts().plot.pie(autopct=("%.2f%%"),figsize=(1,1))
+#     fig = x['sentiment'].value_counts().plot.pie(autopct=("%.2f%%"),figsize=(1,1))
     #fig = x['sentiment'].value_counts().plot.pie(autopct="%.2f%%",figsize=(2,2), wedgeprops={'linewidth': 1.0, 'edgecolor': 'white'}, )
-    return fig
+    return x['sentiment']
     
 #-----------------------------------------------------------------------------------------
 #Above code deficts the user defined functions
@@ -335,5 +335,6 @@ else:
     st.subheader('Stock Sentiment Analysis')
     df_tweet = get_tweets(dict_list[selected_stock])
     tweet_text = df_tweet['Text']
-    senti_fig = tweet_sentiment(tweet_text)
-    st.pyplot(senti_fig)
+    x = tweet_sentiment(tweet_text)
+    fig = x['sentiment'].value_counts().plot.pie(autopct=("%.2f%%"),figsize=(1,1))
+    st.pyplot(fig)
