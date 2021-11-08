@@ -12,7 +12,7 @@ import yfinance as yf
 #libraires for visualisation
 import plotly.graph_objects as go
 import matplotlib.pyplot as plt
-plt.rcParams.update({'font.size': 3})
+plt.rcParams['font.size'] = 9.0
 
 #Libraries for model building
 from tensorflow.keras.models import Sequential
@@ -337,7 +337,6 @@ else:
     tweet_text = df_tweet['Text']
     x = tweet_sentiment(tweet_text)
     fig, ax = plt.subplots()
-#     ax.pie(x['sentiment'].value_counts(), labels=x['sentiment'].value_counts().index, autopct='%.2f%%')
-    ax.bar(x['sentiment'].value_counts().index, x['sentiment'].value_counts())
+    ax.pie(x['sentiment'].value_counts(), labels=x['sentiment'].value_counts().index, autopct='%.2f%%')
     c1, c2, c3 = st.columns(3)
     c2.pyplot(fig)
