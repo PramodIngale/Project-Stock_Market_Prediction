@@ -192,6 +192,7 @@ def get_tweets(company_name):
 
 #-----------------------------------------------------------------------------------------
 #Sentiment Analysis of collected tweets
+@st.cache
 def tweet_sentiment(tweet):
     output=[]
     for i in range(len(tweet)):
@@ -225,8 +226,6 @@ def tweet_sentiment(tweet):
     x['compound'] = [item['compound'] for item in x['score']]
     # decide sentiment as positive, negative and neutral
     x['sentiment'] = [ 'Positive' if i >= 0.05 else 'Negative' if i <= - 0.05 else 'Neutral' for i in x['compound']]
-#     fig = x['sentiment'].value_counts().plot.pie(autopct=("%.2f%%"),figsize=(1,1))
-    #fig = x['sentiment'].value_counts().plot.pie(autopct="%.2f%%",figsize=(2,2), wedgeprops={'linewidth': 1.0, 'edgecolor': 'white'}, )
     return x
     
 #-----------------------------------------------------------------------------------------
@@ -338,5 +337,6 @@ else:
     x = tweet_sentiment(tweet_text)
     fig, ax = plt.subplots()
     ax.pie(x['sentiment'].value_counts(), labels=x['sentiment'].value_counts().index, autopct='%.2f%%')
-    c1, c2, c3 = st.columns([0.5,2,0.5])
+    c1, c2, c3 = st.columns([1,2,1])
     c2.pyplot(fig)
+    
