@@ -174,20 +174,20 @@ def forecastedfigure(train_df, predicted_df):
     return forecast_df
 
 #-----------------------------------------------------------------------------------------
-# #Function to extract stock tweets
-# @st.cache
-# def get_tweets(company_name):
-#     currect_date = date.today()
-#     # Creating list to append tweet data to
-#     tweets = []
-#     # Using TwitterSearchScraper to scrape data and append tweets to list
-#     # Using enumerate to get the tweet and the index (to break at certain no of tweets)
-#     for i,tweet in enumerate(twitterScraper.TwitterSearchScraper('{} until:{}'.format(company_name, currect_date- timedelta(days=3))).get_items()):
-#         if i>700:
-#             break
-#         tweets.append([tweet.date, tweet.content])
-#     tweet_df =pd.DataFrame(tweets, columns=['Datetime', 'Text'])
-#     return tweet_df
+#Function to extract stock tweets
+@st.cache
+def get_tweets(company_name):
+    currect_date = date.today()
+    # Creating list to append tweet data to
+    tweets = []
+    # Using TwitterSearchScraper to scrape data and append tweets to list
+    # Using enumerate to get the tweet and the index (to break at certain no of tweets)
+    for i,tweet in enumerate(twitterScraper.TwitterSearchScraper('{} until:{}'.format(company_name, currect_date- timedelta(days=3))).get_items()):
+        if i>700:
+            break
+        tweets.append([tweet.date, tweet.content])
+    tweet_df =pd.DataFrame(tweets, columns=['Datetime', 'Text'])
+    return tweet_df
 
 #-----------------------------------------------------------------------------------------
 # #Sentiment Analysis of collected tweets
