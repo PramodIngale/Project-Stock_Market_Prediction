@@ -338,4 +338,5 @@ else:
     ax.pie(x['sentiment'].value_counts(), labels=x['sentiment'].value_counts().index, autopct='%.2f%%')
     c1, c2, c3 = st.columns([1,2,1])
     c2.pyplot(fig)
+    st.write(f""The news on the stock is more towards {x['sentiment'].value_counts().idxmax()}"
     
