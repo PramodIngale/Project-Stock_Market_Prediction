@@ -47,7 +47,6 @@ def nsestocklist():
 
 #Downlaod NSE data for specific company
 
-@st.cache
 def load_data(comp_name):
     data = yf.download(comp_name, "2016-1-1", date.today())
     return data
